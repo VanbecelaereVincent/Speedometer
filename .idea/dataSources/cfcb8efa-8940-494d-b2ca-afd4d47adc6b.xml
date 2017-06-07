@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - @PiVincent">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
+    <root id="1"/>
+    <schema id="2" parent="1" name="speedometerdb">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="SpeedometerDB"/>
+    <table id="7" parent="2" name="Deelsessie"/>
+    <table id="8" parent="2" name="Gebruiker"/>
+    <table id="9" parent="2" name="Sessie"/>
+    <table id="10" parent="2" name="Snelheidsmeter"/>
+    <table id="11" parent="2" name="SnelheidsmeterGebruiker"/>
+    <column id="12" parent="7" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="13" parent="7" name="Begintijd">
+      <Position>2</Position>
+      <DataType>time|0</DataType>
+    </column>
+    <column id="14" parent="7" name="Eindtijd">
+      <Position>3</Position>
+      <DataType>time|0</DataType>
+    </column>
+    <column id="15" parent="7" name="Afstand">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="16" parent="7" name="SessieID">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="17" parent="7" name="Deelsessie_Sessie_ID_test_fk">
+      <ColNames>SessieID</ColNames>
+    </index>
+    <key id="18" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="19" parent="7" name="Deelsessie_Sessie_ID_test_fk">
+      <ColNames>SessieID</ColNames>
+      <RefSchemaName>speedometerdb</RefSchemaName>
+      <RefTableName>Sessie</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="20" parent="8" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="21" parent="8" name="Naam">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="22" parent="8" name="Voornaam">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="23" parent="8" name="Leeftijd">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="24" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="25" parent="9" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="26" parent="9" name="Begin">
+      <Position>2</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="27" parent="9" name="Einde">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="28" parent="9" name="SnelheidsmeterGebruikerID">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="29" parent="9" name="Sessie_SnelheidsmeterGebruiker_ID_test_fk">
+      <ColNames>SnelheidsmeterGebruikerID</ColNames>
+    </index>
+    <key id="30" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="31" parent="9" name="Sessie_SnelheidsmeterGebruiker_ID_test_fk">
+      <ColNames>SnelheidsmeterGebruikerID</ColNames>
+      <RefSchemaName>speedometerdb</RefSchemaName>
+      <RefTableName>SnelheidsmeterGebruiker</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="32" parent="10" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="33" parent="10" name="Naam">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="34" parent="10" name="Beschrijving">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <key id="35" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="36" parent="11" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="37" parent="11" name="SnelheidsmeterID">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="38" parent="11" name="GebruikerID">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="39" parent="11" name="SnelheidsmeterGebruiker_Gebruiker_ID_test_fk">
+      <ColNames>GebruikerID</ColNames>
+    </index>
+    <index id="40" parent="11" name="SnelheidsmeterGebruiker_Snelheidsmeter_ID_test_fk">
+      <ColNames>SnelheidsmeterID</ColNames>
+    </index>
+    <key id="41" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="42" parent="11" name="SnelheidsmeterGebruiker_Snelheidsmeter_ID_test_fk">
+      <ColNames>SnelheidsmeterID</ColNames>
+      <RefSchemaName>speedometerdb</RefSchemaName>
+      <RefTableName>Snelheidsmeter</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <foreign-key id="43" parent="11" name="SnelheidsmeterGebruiker_Gebruiker_ID_test_fk">
+      <ColNames>GebruikerID</ColNames>
+      <RefSchemaName>speedometerdb</RefSchemaName>
+      <RefTableName>Gebruiker</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>
