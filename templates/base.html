@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Speedometer - {% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+</head>
+<body>
+
+
+<header>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}" {% block home %} {% endblock %}>Home</a></li>
+            <li><a href="{{ url_for('speedometer') }}" {% block speedometer %} {% endblock %}>Speedometer</a></li>
+            <li><a href="{{ url_for('contact') }}" {% block contact %} {% endblock %}>Contact</a></li>
+        </ul>
+    </nav>
+
+</header>
+
+
+<main>
+
+    {% block main %}
+
+
+
+
+    {% endblock %}
+
+
+</main>
+
+
+<footer>
+
+
+
+</footer>
+
+
+
+</body>
+</html>
