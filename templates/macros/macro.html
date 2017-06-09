@@ -1,0 +1,27 @@
+{% macro build_input(kind, name, value, class) %}
+
+
+    <input type="{{ kind }}" name="{{ name }}" value="{{ value }}" class="{{ class }}">
+
+
+{% endmacro %}
+
+{% macro build_label(name, text) %}
+
+    <label for="{{ name }}">{{ text }}</label>
+
+{% endmacro %}
+
+{% macro build_textarea(naam, idee, kolommen, rijen) %}
+
+    <textarea name="{{ name }}" id="{{ idee }}" cols="{{ kolommen }}" rows="{{ rijen }}"></textarea>
+
+{% endmacro %}
+
+
+{% macro build_image(name, width, height) %}
+
+
+    <img src="{{ url_for('static', filename="images/" + name) }}" alt="" width = "{{ width }}" height="{{ height }}">
+
+{% endmacro %}

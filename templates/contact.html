@@ -1,1 +1,36 @@
 {% extends 'base.html' %}
+
+{% block title %}
+
+Contact
+
+{% endblock %}
+
+
+{% block contact %}
+
+class="active"
+
+{% endblock %}
+
+
+
+{% block main %}
+
+    <section class="type1">
+        <h1>Contact</h1>
+        <form action="" method="post" class="form_type2">
+            {{ macros.build_label('naam', 'Naam: ') }}
+            {{ macros.build_input('text', 'naam', '', '') }}
+
+            {{ macros.build_label('voornaam', 'Voornaam: ') }}
+            {{ macros.build_input('text', 'voornaam', '', '') }}
+
+            {{ macros.build_label('textarea', 'Bericht: ') }}
+            {{ macros.build_textarea('textarea', 'textarea1', 30, 30) }}
+
+            {{ macros.build_input('submit', 'submit', 'Versturen', 'button') }}
+        </form>
+    </section>
+
+{% endblock %}
