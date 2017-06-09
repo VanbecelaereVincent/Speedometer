@@ -9,27 +9,22 @@ GPIO.setup(hall_sensor, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
 diameter = 45
 afstand = 0
-gedetecteerd = 0
-
-starttijd = time.time()
 
 
 
 def magneet_gedetecteerd(getal):
 
-        global afstand, gedetecteerd
-
+        global afstand
         afstand += diameter
 
-def get_afstand():
 
+def get_afstand():
+    return afstand
 
 GPIO.add_event_detect(hall_sensor, GPIO.FALLING, callback=magneet_gedetecteerd, bouncetime=500)
 
 
-while True:
-    distance = get_afstand()
-    LCD.write(distance)
+
 
 
 

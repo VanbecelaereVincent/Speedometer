@@ -13,7 +13,7 @@ LCD_LINE2 = 0xC0 #adres van mijn tweede lijn
 LCD_LINE3 = 0x94 #adres van mijn derde lijn
 LCD_LINE4 = 0xD4 #adres van mijn vierde lijn
 
-LCD_BACKLIGHT = 0x08 # uit = 0x00
+LCD_BACKLIGHT = 0x08 # uit = 0x00, aan = 0x08
 
 ENABLE = 0b00000100 #enable bit
 
@@ -76,17 +76,13 @@ def write(distance):
 
     lcd_init()
 
-    while True:
 
 
-        lcd_string('{0}'.format(distance), LCD_LINE1)
-        lcd_string('een', LCD_LINE2)
-        lcd_string("een", LCD_LINE3)
-        lcd_string("test.", LCD_LINE4)
+    lcd_string('{0}'.format(distance), LCD_LINE1)
+    lcd_string('', LCD_LINE2)
+    lcd_string("", LCD_LINE3)
+    lcd_string("", LCD_LINE4)
 
-        lcd_byte(0x01, LCD_CMD)
-
-        time.sleep(0.5)
 
 
 #if __name__ == '__main__':
