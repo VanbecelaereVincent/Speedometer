@@ -72,16 +72,14 @@ def lcd_string(message, line):
         lcd_byte(ord(message[i]), LCD_CHR)
 
 
-def write(distance):
+def write(lijn1,lijn2,lijn3,lijn4):
 
     lcd_init()
 
-
-
-    lcd_string('{0}'.format(distance), LCD_LINE1)
-    lcd_string('', LCD_LINE2)
-    lcd_string("", LCD_LINE3)
-    lcd_string("", LCD_LINE4)
+    lcd_string('{0}'.format(lijn1), LCD_LINE1)
+    lcd_string('{0}'.format(lijn2), LCD_LINE2)
+    lcd_string("{0}".format(lijn3), LCD_LINE3)
+    lcd_string("{0}".format(lijn4), LCD_LINE4)
 
 
 

@@ -27,9 +27,21 @@ In sit amet euismod enim. Fusce tempus bibendum ex, mollis pellentesque leo cons
         </p>
 
         <form action="" class="form_type2">
+
+            {{ macros.build_label('', 'Gelieve uw voornaam in te geven: ') }}
+            {{ macros.build_input('text', 'voornaam','','') }}
+
+            {{ macros.build_label('','Gelieve uw familienaam in te geven: ') }}
+            {{ macros.build_input('text', 'naam', '','') }}
+
+            {{ macros.build_label('','Gelieve uw leeftijd in te geven: ') }}
+            {{ macros.build_input('text', 'leeftijd','','') }}
+
             {{ macros.build_label('', 'Geef de diamater van uw wiel in (cm): ') }}
             {{ macros.build_input('text', 'diameter wiel', '', '') }}
+
             {{ macros.build_input('submit', 'submit1', 'Verzenden', 'button') }}
+
         </form>
 
     </section>

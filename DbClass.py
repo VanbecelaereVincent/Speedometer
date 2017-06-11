@@ -3,10 +3,10 @@ class DbClass:
         import mysql.connector as connector
 
         self.__dsn = {
-            "host": "HostnameHere",
-            "user": "UserNameHere",
-            "passwd": "PasswdHere",
-            "db": "DBNameHere"
+            "host": "localhost",
+            "user": "vincent",
+            "passwd": "computer",
+            "db": "speedometerdb"
         }
 
         self.__connection = connector.connect(**self.__dsn)
@@ -32,11 +32,11 @@ class DbClass:
         self.__cursor.close()
         return result
 
-    def setDataToDatabase(self, value1):
-        # Query met parameters
-        sqlQuery = "INSERT INTO tablename (columnname) VALUES ('{param1}')"
-        # Combineren van de query en parameter
-        sqlCommand = sqlQuery.format(param1=value1)
+    def setDataToDatabaseSessie(self, value1,value2,value3,value4):
+        #Query met parameters
+        sqlQuery = "INSERT INTO speedometerdb.Sessie VALUES ('{param1}', '{param2}','{param3}','{param4}')"
+        #Combineren van de query en parameter
+        sqlCommand = sqlQuery.format(param1=value1, param2=value2, param3 = value3, param4= value4)
 
         self.__cursor.execute(sqlCommand)
         self.__connection.commit()
