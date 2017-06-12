@@ -19,16 +19,19 @@ class="active"
 
     <section class="type1">
         <h1>Contact</h1>
-        <form action="" method="post" class="form_type2">
+        <form action="" class="form_type2">
             {{ macros.build_label('naam', 'Naam: ') }}
+            <br>
             {{ macros.build_input('text', 'naam', '', '') }}
-
+            <br>
             {{ macros.build_label('voornaam', 'Voornaam: ') }}
+            <br>
             {{ macros.build_input('text', 'voornaam', '', '') }}
-
+            <br>
             {{ macros.build_label('textarea', 'Bericht: ') }}
+            <br>
             {{ macros.build_textarea('textarea', 'textarea1', 30, 30) }}
-
+            <br>
             {{ macros.build_input('submit', 'submit3', 'Versturen', 'button') }}
         </form>
     </section>

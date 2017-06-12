@@ -26,20 +26,25 @@ Speedometer
 In sit amet euismod enim. Fusce tempus bibendum ex, mollis pellentesque leo consectetur quis. Suspendisse potenti. Maecenas rutrum ante id augue tempor, scelerisque porttitor lacus ullamcorper. Fusce tempus massa sit amet nulla facilisis, in varius erat sagittis. Cras eu.
         </p>
 
-        <form action="" class="form_type2">
+            <form action="" class="form_type2">
 
             {{ macros.build_label('', 'Gelieve uw voornaam in te geven: ') }}
+            <br>
             {{ macros.build_input('text', 'voornaam','','') }}
-
+            <br>
             {{ macros.build_label('','Gelieve uw familienaam in te geven: ') }}
+            <br>
             {{ macros.build_input('text', 'naam', '','') }}
-
+            <br>
             {{ macros.build_label('','Gelieve uw leeftijd in te geven: ') }}
+            <br>
             {{ macros.build_input('text', 'leeftijd','','') }}
+            <br>
 
             {{ macros.build_label('', 'Geef de diamater van uw wiel in (cm): ') }}
+            <br>
             {{ macros.build_input('text', 'diameter wiel', '', '') }}
-
+            <br>
             {{ macros.build_input('submit', 'submit1', 'Verzenden', 'button') }}
 
         </form>
@@ -51,24 +56,32 @@ In sit amet euismod enim. Fusce tempus bibendum ex, mollis pellentesque leo cons
         <form action="{{ url_for('static', filename='javascript/chart.js')}}" method="get" class="form_type1">
 
             {{ macros.build_label('', 'Interval: ') }}
+            <br>
             <select name="" id="test">
                 <option value="Per dag">Per dag</option>
                 <option value="Per maand">Per maand</option>
                 <option value="Per jaar">Per jaar</option>
             </select>
-
+            <br>
             {{ macros.build_label('', 'Datum: ') }}
 
+            <br>
+            <select>
+                <option value="10-10-2017">Snelheid</option>
 
+            </select>
+
+            <br>
 
 
             {{ macros.build_label('', 'Welke Grafiek: ') }}
+            <br>
             <select>
                 <option value="Snelheid">Snelheid</option>
                 <option value="Tijd">Tijd</option>
                 <option value="Afstand">Afstand</option>
             </select>
-
+            <br>
             {{ macros.build_input('submit', 'submit2', 'Teken Grafiek', 'button') }}
 
 

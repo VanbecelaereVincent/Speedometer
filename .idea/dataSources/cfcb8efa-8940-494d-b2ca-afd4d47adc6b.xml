@@ -9,7 +9,9 @@
     <schema id="3" parent="1" name="information_schema"/>
     <schema id="4" parent="1" name="mysql"/>
     <schema id="5" parent="1" name="performance_schema"/>
-    <schema id="6" parent="1" name="SpeedometerDB"/>
+    <schema id="6" parent="1" name="SpeedometerDB">
+      <Current>1</Current>
+    </schema>
     <table id="7" parent="2" name="Deelsessie"/>
     <table id="8" parent="2" name="Gebruiker"/>
     <table id="9" parent="2" name="Sessie"/>

@@ -150,7 +150,9 @@ form>label {
 
 .form_type2 {
     width: 50%;
-    margin: 0 auto;
+    margin-left: 10%;
+    margin-top: 10px;
+
 }
 
 .form_type1 {
@@ -158,6 +160,10 @@ form>label {
     margin-left: 10%;
 }
 
+
+input, label, select, textarea {
+    margin: 10px 0;
+}
 
 
 

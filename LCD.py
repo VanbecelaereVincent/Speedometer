@@ -83,15 +83,6 @@ def write(lijn1,lijn2,lijn3,lijn4):
 
 
 
-#if __name__ == '__main__':
-
-#    try:
-#        write()
- #   except KeyboardInterrupt:
-  #      pass
-  #  finally:
-   #     lcd_byte(0x01, LCD_CMD)
-
 
 
 
