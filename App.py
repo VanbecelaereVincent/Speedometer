@@ -1,21 +1,17 @@
-import time
-import datetime
-import RPi.GPIO as GPIO
+import button
 import LCD
+import datetime
+import time
+#import threading
 import dbconn
-
-import threading
-
-knop_aan_uit = 21
-
-vorigestatus = 0
-wissel = 0
-parameter = 0
 
 tijden_sessie = []
 
 deel_sessie = []
 deel_sessies = []
+
+parameter1 = 0
+parameter2 = 0
 
 
 start_sessie = 0
@@ -25,19 +21,13 @@ huidige_afstand = 0
 total_distance = 0
 stop = 0
 
-start = datetime.datetime.now()
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(knop_aan_uit, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-
-
 def opslaan_deelsessies():
 
     import HallSensor
 
     global start, stop, huidige_afstand, total_distance
 
-    threading.Timer(60.0, opslaan_deelsessies).start()
+    #threading.Timer(60.0, opslaan_deelsessies).start()
 
     stop = datetime.datetime.now()
     total_distance = HallSensor.totale_afstand
@@ -53,10 +43,6 @@ def opslaan_deelsessies():
 
     huidige_afstand = total_distance
 
-    print(deel_sessies)
-
-
-opslaan_deelsessies()
 
 
 
@@ -122,81 +108,50 @@ def write_sessie():
 while True:
 
 
-    status = GPIO.input(knop_aan_uit)
-
-
-    if (status == 1 and vorigestatus == 0):
-
-        if wissel == 1:
-            wissel = 0
-        else:
-            wissel = 1
+    wissel = button.wissel
 
     if wissel == 0:
-
-        if(parameter == 0):
-
-            start_sessie = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            tijden_sessie.append(start_sessie)
-
-
-        parameter += 0.00000000000000000000001
-
-
-        while True:
-
-            import HallSensor
-
-
-
-            snelheid = '{0} km/u'.format(HallSensor.snelheid)
-
-            totale_afstand = '{0} km'.format(HallSensor.totale_afstand)
-
-            LCD.write('----SPEEDOMETER-----',snelheid,totale_afstand,time.ctime(int(time.time())))
-            time.sleep(1)
-            #LCD.lcd_byte(0x01, 0)
-
-            break
-
-
+        LCD.write('Begin een sessie', '', '', '')
 
     if wissel == 1:
 
-        if (parameter > 0):
+        if(parameter1 == 0):
+                start_sessie = int(str(datetime.datetime.now())[17:19])
+                start_sessie_voor_lijst = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                tijden_sessie.append(start_sessie_voor_lijst)
 
-            einde_sessie = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            tijden_sessie.append(einde_sessie)
+        parameter1 += 0.000000000000000000000001
 
-            LCD.write('Einde sessie','','','')
+        nu = int(str(datetime.datetime.now())[17:19]) #14:16 voor minutes
 
+        if(nu == start_sessie+ 2 ):
+              print('test')
+              #opslaan_deelsessies()
 
-
-            parameter = 0
-
-            write_sessie()
-            write_deelsessies()
-
-
-            time.sleep(2)
-
-
-
-        einde_sessie = 0
-
-
-        if(parameter == 0):
-
-            LCD.write('Begin een sessie','','','')
-
-    vorigestatus = status
+        start_sessie = nu
 
 
 
 
+        import HallSensor
 
-GPIO.add_event_detect(hall_sensor, GPIO.FALLING, callback=magneet_gedetecteerd, bouncetime=20)
+        snelheid = '{0} km/u'.format(HallSensor.snelheid)
 
+        totale_afstand = '{0} km'.format(HallSensor.totale_afstand)
 
+        LCD.write('----SPEEDOMETER-----', snelheid, totale_afstand, time.ctime(int(time.time())))
+        time.sleep(1)
+
+    if wissel == 2:
+        einde_sessie = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        tijden_sessie.append(einde_sessie)
+
+        LCD.write('Einde sessie', '', '', '')
+
+        write_sessie()
+        #print(tijden_sessie)
+        #write_deelsessies()
+        parameter1 = 0
+        time.sleep(3)
 
 
