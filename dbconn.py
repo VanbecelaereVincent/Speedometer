@@ -15,12 +15,15 @@ class DbConnection:
     # met query(..., return_dict=True) krijg je een dictionary terug,
     # dat vermindert de kans op fouten (zeker bij SELECT * FROM..)
     def query(self, query: str, data: dict = None, dictionary=False):
-        cursor = self.__connection.cursor(dictionary=dictionary)
+        try:
+            cursor = self.__connection.cursor(dictionary=dictionary)
+        except TypeError:
+            print("Jouw versie van mysql-connector ondersteunt de optie dictionary niet :(")
+            cursor = self.__connection.cursor()
         cursor.execute(query, data)
         result = cursor.fetchall()
         cursor.close()
         return result
-
 
     # voor schrijven (INSERT, UPDATE, ...)
     def execute(self, query: str, data: dict = None):

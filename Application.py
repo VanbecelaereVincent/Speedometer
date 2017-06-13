@@ -4,6 +4,8 @@ import RPi.GPIO as GPIO
 import LCD
 import dbconn
 
+import threading
+
 knop_aan_uit = 21
 
 vorigestatus = 0
@@ -29,81 +31,93 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(knop_aan_uit, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
 
-# def opslaan_deelsessies():
-#
-#     import HallSensor
-#
-#     global start, stop, huidige_afstand, total_distance
-#
-#     nu = datetime.datetime.now()
-#
-#     if (start + datetime.timedelta(seconds=60) == nu):
-#
-#         stop = datetime.datetime.now()
-#         total_distance = HallSensor.totale_afstand
-#         afgelegde_afstand = total_distance - huidige_afstand
-#         deel_sessie.append(nu.strftime('%H:%M:%S'))
-#         deel_sessie.append(stop.strftime('%H:%M:%S'))
-#         deel_sessie.append(afgelegde_afstand)
-#
-#     huidige_afstand = total_distance
-#     start = stop
-#
-#
+def opslaan_deelsessies():
+
+    import HallSensor
+
+    global start, stop, huidige_afstand, total_distance
+
+    threading.Timer(60.0, opslaan_deelsessies).start()
+
+    stop = datetime.datetime.now()
+    total_distance = HallSensor.totale_afstand
+    afgelegde_afstand = total_distance - huidige_afstand
+
+    start = datetime.datetime.now() - datetime.timedelta(seconds=60)
+
+    start = start.strftime('%H:%M:%S')
+    stop = stop.strftime('%H:%M:%S')
 
 
-# def write_deelsessies():
-#
-#     db = dbconn.DbConnection()
-#
-#     sql1 = ('SELECT ID from Sessie ORDER BY ID DESC LIMIT 1')
-#
-#     SessieID = db.query(sql1)
-#
-#     for deelsessie in deel_sessies:
-#
-#         sql2 = (
-#             'INSERT INTO Deelsessie (Begintijd, Eindtijd, Afstand, SessieID) '
-#             'VALUES ( %(new_begin)s, %(new_einde)s, %(new_afstand)s ,%(new_SessieID)s );'
-#         )
-#
-#
-#
-#         params2 = {
-#             'new_begin': deelsessie[0],
-#             'new_einde': deelsessie[1],
-#             'new_afstand': deelsessie[3],
-#             'new_SessieID': SessieID
-#         }
-#
-#         db.execute(sql2, params2)
-#
-#     for deelsessie in deel_sessies:
-#         deel_sessies.remove(deel_sessie)
+    deel_sessies.append([start, stop, afgelegde_afstand])
+
+    huidige_afstand = total_distance
+
+    print(deel_sessies)
 
 
-# def write_sessie():
-#     db = dbconn.DbConnection()
-#
-#     sql1 = ('SELECT ID from SnelheidsmeterGebruiker ORDER BY ID DESC LIMIT 1')
-#
-#     snelheidsmeterGebruikerID = db.query(sql1)
-#
-#     sql2 = (
-#         'INSERT INTO Sessie (Begin, Einde, SnelheidsmeterGebruikerID) '
-#         'VALUES ( %(new_begin)s, %(new_einde)s, %(new_SnelheidsmeterGebruikerID)s );'
-#     )
-#
-#     params2 = {
-#         'new_begin': tijden_sessie[0],
-#         'new_einde': tijden_sessie[1],
-#         'new_SnelheidsmeterGebruikerID': snelheidsmeterGebruikerID
-#     }
-#
-#     db.execute(sql2, params2)
-#
-#     tijden_sessie.remove(tijden_sessie[0])
-#     tijden_sessie.remove(tijden_sessie[0])
+opslaan_deelsessies()
+
+
+
+def write_deelsessies():
+
+
+    deel_sessies.remove(deel_sessies[0])
+
+    db = dbconn.DbConnection()
+
+    sql1 = ('SELECT ID from Sessie ORDER BY ID DESC LIMIT 1')
+
+    SessieID = db.query(sql1)
+
+    for deelsessie in deel_sessies:
+
+        sql2 = (
+            'INSERT INTO Deelsessie (Begintijd, Eindtijd, Afstand, SessieID) '
+            'VALUES ( %(new_begin)s, %(new_einde)s, %(new_afstand)s ,%(new_SessieID)s );'
+        )
+
+
+
+        params2 = {
+            'new_begin': deelsessie[0],
+            'new_einde': deelsessie[1],
+            'new_afstand': deelsessie[2],
+            'new_SessieID': SessieID[0][0]
+        }
+
+        db.execute(sql2, params2)
+
+    for deelsessie in deel_sessies:
+        deel_sessies.remove(deelsessie)
+
+
+def write_sessie():
+    db = dbconn.DbConnection()
+
+    sql1 = ('SELECT ID from SnelheidsmeterGebruiker ORDER BY ID DESC LIMIT 1')
+
+    snelheidsmeterGebruikerID = db.query(sql1)
+
+    print(snelheidsmeterGebruikerID)
+
+    sql2 = (
+        'INSERT INTO Sessie (Begin, Einde, SnelheidsmeterGebruikerID) '
+        'VALUES ( %(new_begin)s, %(new_einde)s, %(new_SnelheidsmeterGebruikerID)s );'
+    )
+
+    params2 = {
+        'new_begin': tijden_sessie[0],
+        'new_einde': tijden_sessie[1],
+        'new_SnelheidsmeterGebruikerID': snelheidsmeterGebruikerID[0][0]
+    }
+
+    db.execute(sql2, params2)
+
+    tijden_sessie.remove(tijden_sessie[0])
+    tijden_sessie.remove(tijden_sessie[0])
+
 
 while True:
 
@@ -128,11 +142,12 @@ while True:
 
         parameter += 0.00000000000000000000001
 
+
         while True:
 
             import HallSensor
 
-            # opslaan_deelsessies()
+
 
             snelheid = '{0} km/u'.format(HallSensor.snelheid)
 
@@ -156,10 +171,12 @@ while True:
             LCD.write('Einde sessie','','','')
 
 
+
             parameter = 0
 
-            #write_sessie()
-            #write_deelsessies()
+            write_sessie()
+            write_deelsessies()
+
 
             time.sleep(2)
 
@@ -175,6 +192,10 @@ while True:
     vorigestatus = status
 
 
+
+
+
+GPIO.add_event_detect(hall_sensor, GPIO.FALLING, callback=magneet_gedetecteerd, bouncetime=20)
 
 
 

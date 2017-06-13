@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask import render_template
 import os
 
@@ -12,8 +12,14 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
-@app.route('/speedometer')
+@app.route('/speedometer', methods=['POST'])
+
 def speedometer():
+
+    voornaam = request.form['voornaam']
+
+    print(voornaam)
+
     return render_template('speedometer.html')
 
 @app.route('/contact')

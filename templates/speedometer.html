@@ -26,7 +26,7 @@ Speedometer
 In sit amet euismod enim. Fusce tempus bibendum ex, mollis pellentesque leo consectetur quis. Suspendisse potenti. Maecenas rutrum ante id augue tempor, scelerisque porttitor lacus ullamcorper. Fusce tempus massa sit amet nulla facilisis, in varius erat sagittis. Cras eu.
         </p>
 
-            <form action="" class="form_type2">
+            <form action="{{ url_for('home') }}" class="form_type2" method="get">
 
             {{ macros.build_label('', 'Gelieve uw voornaam in te geven: ') }}
             <br>

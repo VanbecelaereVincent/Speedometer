@@ -44,7 +44,7 @@ def magneet_gedetecteerd(getal):
 
 
 
-GPIO.add_event_detect(hall_sensor, GPIO.FALLING, callback=magneet_gedetecteerd, bouncetime=500)
+GPIO.add_event_detect(hall_sensor, GPIO.FALLING, callback=magneet_gedetecteerd, bouncetime=20)
 
 
 
