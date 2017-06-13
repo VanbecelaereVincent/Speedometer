@@ -2,7 +2,6 @@ import button
 import LCD
 import datetime
 import time
-#import threading
 import dbconn
 
 tijden_sessie = []
@@ -21,22 +20,20 @@ huidige_afstand = 0
 total_distance = 0
 stop = 0
 
-def opslaan_deelsessies():
+def opslaan_deelsessies(start, stop):
 
     import HallSensor
 
-    global start, stop, huidige_afstand, total_distance
+    global huidige_afstand, total_distance
 
-    #threading.Timer(60.0, opslaan_deelsessies).start()
-
-    stop = datetime.datetime.now()
+    # stop = datetime.datetime.now()
     total_distance = HallSensor.totale_afstand
     afgelegde_afstand = total_distance - huidige_afstand
 
-    start = datetime.datetime.now() - datetime.timedelta(seconds=60)
+    #start = datetime.datetime.now() - datetime.timedelta(minutes=1)
 
-    start = start.strftime('%H:%M:%S')
-    stop = stop.strftime('%H:%M:%S')
+    #start = start.strftime('%H:%M:%S')
+    #stop = stop.strftime('%H:%M:%S')
 
 
     deel_sessies.append([start, stop, afgelegde_afstand])
@@ -47,9 +44,6 @@ def opslaan_deelsessies():
 
 
 def write_deelsessies():
-
-
-    deel_sessies.remove(deel_sessies[0])
 
     db = dbconn.DbConnection()
 
@@ -75,9 +69,7 @@ def write_deelsessies():
 
         db.execute(sql2, params2)
 
-    for deelsessie in deel_sessies:
-        deel_sessies.remove(deelsessie)
-
+    deel_sessies.clear()
 
 def write_sessie():
     db = dbconn.DbConnection()
@@ -116,21 +108,45 @@ while True:
     if wissel == 1:
 
         if(parameter1 == 0):
-                start_sessie = int(str(datetime.datetime.now())[17:19])
+                global start
+
+                start_sessie = datetime.datetime.now()
+                start = datetime.datetime.now().strftime('%H:%M:%S')
                 start_sessie_voor_lijst = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 tijden_sessie.append(start_sessie_voor_lijst)
 
         parameter1 += 0.000000000000000000000001
 
-        nu = int(str(datetime.datetime.now())[17:19]) #14:16 voor minutes
+        start_sessie_minutes = int(str(start_sessie)[14:16])
+        #start_sessie_seconds = int(str(start_sessie)[17:19])
 
-        if(nu == start_sessie+ 2 ):
+        start = start_sessie.strftime('%H:%M:%S')
+
+        nu = datetime.datetime.now()
+        nu_minutes = int(str(nu)[14:16]) #14:16 voor minutes
+        #nu_seconds= int(str(nu)[17:19])
+        print("----minutes---")
+        print(nu_minutes)
+        print(start_sessie_minutes)
+
+        stop = datetime.datetime.now().strftime('%H:%M:%S')
+
+
+
+        #and (nu_seconds == start_sessie_seconds)
+
+        if((nu_minutes == start_sessie_minutes + 1) or (nu_minutes == start_sessie_minutes - 59)):
+              opslaan_deelsessies(start,stop)
               print('test')
-              #opslaan_deelsessies()
+              parameter2 +=1
 
-        start_sessie = nu
+        if(parameter2 > 0):
 
 
+
+
+            start_sessie = nu
+            parameter2=0
 
 
         import HallSensor
@@ -150,7 +166,7 @@ while True:
 
         write_sessie()
         #print(tijden_sessie)
-        #write_deelsessies()
+        write_deelsessies()
         parameter1 = 0
         time.sleep(3)
 
