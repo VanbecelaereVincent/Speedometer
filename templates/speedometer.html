@@ -26,7 +26,7 @@ Speedometer
 In sit amet euismod enim. Fusce tempus bibendum ex, mollis pellentesque leo consectetur quis. Suspendisse potenti. Maecenas rutrum ante id augue tempor, scelerisque porttitor lacus ullamcorper. Fusce tempus massa sit amet nulla facilisis, in varius erat sagittis. Cras eu.
         </p>
 
-            <form action="{{ url_for('home') }}" class="form_type2" method="get">
+            <form action="{{ url_for('speedometer') }}" class="form_type2" method="POST">
 
             {{ macros.build_label('', 'Gelieve uw voornaam in te geven: ') }}
             <br>
@@ -38,13 +38,15 @@ In sit amet euismod enim. Fusce tempus bibendum ex, mollis pellentesque leo cons
             <br>
             {{ macros.build_label('','Gelieve uw leeftijd in te geven: ') }}
             <br>
-            {{ macros.build_input('text', 'leeftijd','','') }}
+            {{ macros.build_input('number', 'leeftijd','','') }}
             <br>
 
             {{ macros.build_label('', 'Geef de diamater van uw wiel in (cm): ') }}
             <br>
-            {{ macros.build_input('text', 'diameter wiel', '', '') }}
+            {{ macros.build_input('number', 'diameter wiel', '', '') }}
             <br>
+                <i>{{ comment }}</i>
+                <br>
             {{ macros.build_input('submit', 'submit1', 'Verzenden', 'button') }}
 
         </form>

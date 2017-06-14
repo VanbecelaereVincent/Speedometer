@@ -3,6 +3,7 @@ import LCD
 import datetime
 import time
 import dbconn
+import HallSensor
 
 tijden_sessie = []
 
@@ -16,25 +17,20 @@ parameter2 = 0
 start_sessie = 0
 einde_sessie = 0
 
-huidige_afstand = 0
+huidige_afstand = 0.000
 total_distance = 0
 stop = 0
 
-def opslaan_deelsessies(start, stop):
+def opslaan_deelsessies(start, stop, total_distance):
 
-    import HallSensor
 
-    global huidige_afstand, total_distance
+    global huidige_afstand
 
-    # stop = datetime.datetime.now()
-    total_distance = HallSensor.totale_afstand
     afgelegde_afstand = total_distance - huidige_afstand
 
-    #start = datetime.datetime.now() - datetime.timedelta(minutes=1)
-
-    #start = start.strftime('%H:%M:%S')
-    #stop = stop.strftime('%H:%M:%S')
-
+    print(total_distance)
+    print(huidige_afstand)
+    print(afgelegde_afstand)
 
     deel_sessies.append([start, stop, afgelegde_afstand])
 
@@ -131,12 +127,12 @@ while True:
 
         stop = datetime.datetime.now().strftime('%H:%M:%S')
 
-
+        total_distance = HallSensor.totale_afstand
 
         #and (nu_seconds == start_sessie_seconds)
 
         if((nu_minutes == start_sessie_minutes + 1) or (nu_minutes == start_sessie_minutes - 59)):
-              opslaan_deelsessies(start,stop)
+              opslaan_deelsessies(start,stop, total_distance)
               print('test')
               parameter2 +=1
 
@@ -149,7 +145,6 @@ while True:
             parameter2=0
 
 
-        import HallSensor
 
         snelheid = '{0} km/u'.format(HallSensor.snelheid)
 
