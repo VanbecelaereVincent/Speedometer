@@ -1,13 +1,12 @@
 import time
 import RPi.GPIO as GPIO
-import datetime
 hall_sensor = 20
+import dbconn
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(hall_sensor, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
-diameter = 100 #deze ophalen uit veld website (standaard op nul zetten? want wat gebeurd eerste keer?)
-diameter_km = diameter / 100000.0
+
 
 # deelsessies = []
 # deelsessie = []
@@ -22,6 +21,27 @@ totale_afstand = 0
 snelheid = 0
 
 parameter = 0
+
+def ophalen_diameter():
+
+        try:
+
+                db = dbconn.DbConnection()
+
+                sql1 = ('SELECT DiameterWiel from Gebruiker ORDER BY ID DESC LIMIT 1')
+
+                diameter_lijst = db.query(sql1)
+                diameter = diameter_lijst[0][0]
+
+        except:
+                diameter = 0
+
+        print(diameter)
+        return diameter
+
+diameter = ophalen_diameter()
+
+diameter_km = diameter / 100000.0
 
 
 def magneet_gedetecteerd(getal):
@@ -42,6 +62,14 @@ def magneet_gedetecteerd(getal):
 
         startijd = eindtijd
 
+
+def reset():
+
+        global totale_afstand
+        global snelheid
+
+        totale_afstand = 0
+        snelheid = 0
 
 
 GPIO.add_event_detect(hall_sensor, GPIO.FALLING, callback=magneet_gedetecteerd, bouncetime=20)

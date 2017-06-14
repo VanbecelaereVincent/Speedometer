@@ -20,27 +20,27 @@
 
          <section class="type1">
             <h1>Home</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempor porta efficitur. Morbi vulputate elit et tellus venenatis porttitor. Maecenas vel tellus vitae ipsum tristique posuere. Morbi eu varius massa. Nullam non vehicula risus. Quisque id venenatis nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porttitor efficitur libero, at bibendum purus consequat fringilla. Ut lorem felis, cursus ac viverra eget, bibendum quis nibh. Praesent eget lacus faucibus, aliquet enim malesuada, scelerisque velit. Aenean vel mollis quam, sed scelerisque dui. Morbi ut quam at enim faucibus luctus id et est.
-
-In sit amet euismod enim. Fusce tempus bibendum ex, mollis pellentesque leo consectetur quis. Suspendisse potenti. Maecenas rutrum ante id augue tempor, scelerisque porttitor lacus ullamcorper. Fusce tempus massa sit amet nulla facilisis, in varius erat sagittis. Cras eu.
+            <p>Welkom op de website van de 'PICycle Speedometer'. Deze snelheidsmeter is mijn eindwerk voor de module project 1, een module die ik volg aan Howest binnen de opleiding NMCT. In feite is het is een soort integratie opdracht gebasseerd op de modules User 1, Device Programming 1, Datacommunication 1 en Datamanagement waarbij aan de hand van een Raspberry Pi data van een sensor ingelezen, opgeslaan in een database en gevisualiseerd wordt. Op deze 'homepagina' krijg je een kort overzicht te zien van de functionaliteiten van de website. Vergeet zeker niet eerst naar de pagina speedometer te gaan en daar jou gegevens te versturen.
             </p>
         </section>
 
 
         <section class="type2">
+            <article>
 
-            <a href="{{ url_for('speedometer') }}"><h1>Speedometer</h1></a>
+                <a href="{{ url_for('speedometer') }}"><h1>Speedometer</h1></a>
             <a href="{{ url_for('speedometer') }}">{{ macros.build_image('', 500,400) }}</a>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempor porta efficitur. Morbi vulputate elit et tellus venenatis porttitor. Maecenas vel tellus vitae ipsum tristique posuere. Morbi eu varius massa. Nullam non vehicula risus. Quisque id venenatis nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porttitor efficitur libero, at bibendum purus consequat fringilla.</p>
+            <p>Op deze pagina kan u uw persoonlijke gegevens meegeven. Deze zullen opgeslaan worden in onze database. Zeer belangrijk is om de diameter van uw wiel door te sturen. Indien u dit niet doet,z al de snelheidsmeter niet correct kunnen werken. Daarnaast kan u op deze pagina ook uw data visualiseren.</p>
+
+            </article>
+
 
         </section>
-
-        <div class="clear"></div>
-
+    
         <section class="type2">
             <a href="{{ url_for('contact') }}"><h1>Contact</h1></a>
             <a href="{{ url_for('contact') }}">{{ macros.build_image('', 500,400) }}</a>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempor porta efficitur. Morbi vulputate elit et tellus venenatis porttitor. Maecenas vel tellus vitae ipsum tristique posuere. Morbi eu varius massa. Nullam non vehicula risus. Quisque id venenatis nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porttitor efficitur libero, at bibendum purus consequat fringilla.</p>
+            <p>Indien u vragen hebt over mijn opleiding, het project, deze snelheidsmeter, de website,.. aarzel dan zeker niet om het contactformulier in te vullen. </p>
         </section>
 
         <div class="clear"></div>

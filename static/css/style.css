@@ -55,6 +55,10 @@ section {
 }
 
 
+p {
+    text-align: center;
+}
+
 .type1>h1 {
     width: 100%;
     background-color: #e96633;
@@ -181,6 +185,11 @@ footer {
     text-align: left;
     padding: 45px 80px;
     margin-top: 50px;
+}
+
+footer p {
+    margin: 0 auto;
+    color: #FFFFFF
 }
 
 

@@ -21,7 +21,7 @@ def speedometer():
 
     if request.method == 'POST':
 
-        comment = "Het werd verzonden"
+        comment = "Het formulier werd reeds verzonden"
 
         result = request.form
         if(result['naam'] != ""):
@@ -88,8 +88,11 @@ def speedometer():
 
     return render_template('speedometer.html', comment = comment)
 
-@app.route('/contact')
+@app.route('/contact',methods= ['POST', 'GET'])
 def contact():
+
+
+
     return render_template('contact.html')
 
 

@@ -21,9 +21,8 @@ Speedometer
     <section class="type1">
 
         <h1>Speedometer</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempor porta efficitur. Morbi vulputate elit et tellus venenatis porttitor. Maecenas vel tellus vitae ipsum tristique posuere. Morbi eu varius massa. Nullam non vehicula risus. Quisque id venenatis nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porttitor efficitur libero, at bibendum purus consequat fringilla. Ut lorem felis, cursus ac viverra eget, bibendum quis nibh. Praesent eget lacus faucibus, aliquet enim malesuada, scelerisque velit. Aenean vel mollis quam, sed scelerisque dui. Morbi ut quam at enim faucibus luctus id et est.
-
-In sit amet euismod enim. Fusce tempus bibendum ex, mollis pellentesque leo consectetur quis. Suspendisse potenti. Maecenas rutrum ante id augue tempor, scelerisque porttitor lacus ullamcorper. Fusce tempus massa sit amet nulla facilisis, in varius erat sagittis. Cras eu.
+        <p>
+            Om uw snelheidsmeter correct te laten werken dient u onderstaand formulier in te vullen. Zeer belangrijk is om de diameter van uw wiel mee te geven. Indien u de verkeerde diameter meegaf, of u bijvoorbeeld een nieuwe fiets aangekocht hebt is het geen probleem om het formulier simpelweg nog eens te versturen. De snelheidsmeter zal zich daarna baseren op uw nieuwe diameter. Tijden het fietsen wordt uw data opgeslaan in een database. Onderaan deze pagina vindt u een functie om deze data te visualiseren.
         </p>
 
             <form action="{{ url_for('speedometer') }}" class="form_type2" method="POST">
@@ -55,7 +54,7 @@ In sit amet euismod enim. Fusce tempus bibendum ex, mollis pellentesque leo cons
 
     <section class="type2">
         <h1>Keuzemenu</h1>
-        <form action="{{ url_for('static', filename='javascript/chart.js')}}" method="get" class="form_type1">
+        <form action="{{ url_for('speedometer') }}" class="form_type1">
 
             {{ macros.build_label('', 'Interval: ') }}
             <br>
@@ -96,6 +95,8 @@ In sit amet euismod enim. Fusce tempus bibendum ex, mollis pellentesque leo cons
     </section>
 
     <section id="grafiek">
+
+            <div id="chart_div"></div>
 
     </section>
 

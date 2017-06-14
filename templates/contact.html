@@ -17,9 +17,9 @@ class="active"
 
 {% block main %}
 
-    <section class="type1">
+    <section class="type1" >
         <h1>Contact</h1>
-        <form action="" class="form_type2">
+        <form action="" class="form_type2" action="{{ url_for('contact') }}" method = 'POST'>
             {{ macros.build_label('naam', 'Naam: ') }}
             <br>
             {{ macros.build_input('text', 'naam', '', '') }}

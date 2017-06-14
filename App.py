@@ -138,13 +138,12 @@ while True:
 
         if(parameter2 > 0):
 
-
-
-
             start_sessie = nu
             parameter2=0
 
 
+        snelheid = 0
+        totale_afstand = 0
 
         snelheid = '{0} km/u'.format(HallSensor.snelheid)
 
@@ -160,8 +159,11 @@ while True:
         LCD.write('Einde sessie', '', '', '')
 
         write_sessie()
+
         #print(tijden_sessie)
         write_deelsessies()
+        HallSensor.reset()
+        huidige_afstand = 0
         parameter1 = 0
         time.sleep(3)
 

@@ -23,5 +23,5 @@ def knop_gedrukt(nmbr):
         wissel = -1
 
 
-GPIO.add_event_detect(knop_aan_uit, GPIO.FALLING, callback=knop_gedrukt, bouncetime=200)
+GPIO.add_event_detect(knop_aan_uit, GPIO.FALLING, callback=knop_gedrukt, bouncetime=500)
 
