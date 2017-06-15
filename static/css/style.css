@@ -1,3 +1,7 @@
+body {
+    position: relative;
+}
+
 
 /* BEGIN HEADER */
 
@@ -24,7 +28,7 @@ header nav ul li {
 
 header nav ul li a {
     color: black;
-    font-weight: bolder;
+    font-weight: bold;
     display: block;
     border-radius: 20px;
     width: 125px;
@@ -32,6 +36,11 @@ header nav ul li a {
     text-align: center;
     line-height: 40px;
     background-color: white;
+
+}
+
+header nav ul li a:hover {
+    font-weight: bolder;
 }
 
 
@@ -41,15 +50,17 @@ header nav ul li a {
 /* BEGIN MAIN */
 
 main {
-    margin: 0 250px;
+    position: relative;
+    width: 100%;
 }
 
 
 
 section {
-    width: 100%;
+    width: 67%;
     margin: 0 auto;
     margin-top: 50px;
+
 
 
 }
@@ -103,15 +114,27 @@ p {
     margin-bottom: 50px;
 }
 
-
-.chart_div {
-    background-color: green;
-    width: 900px;
-    height: 300px;
-    margin: 0 auto;
+article:nth-child(1) {
+    margin-right: 10px;
 }
 
+article:nth-child(2){
+    margin-left:10px;
+}
 
+article p {
+    margin: 0 10%;
+}
+
+.type1>div {
+    margin-left: 100px;
+    margin-right: 100px;
+
+}
+
+div:nth-child(2) {
+    
+}
 
 
  .button {
@@ -154,19 +177,13 @@ p {
 
 
 
-form>label {
-}
 
-.form_type2 {
-    width: 50%;
-    margin-left: 10%;
-    margin-top: 10px;
 
-}
+.type1 form {
+    width: 20%;
+    margin: 0 auto;
+    margin-top: 20px;
 
-.form_type1 {
-
-    margin-left: 10%;
 }
 
 
@@ -190,6 +207,7 @@ footer {
     text-align: left;
     padding: 45px 80px;
     margin-top: 50px;
+
 }
 
 footer p {

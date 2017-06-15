@@ -19,40 +19,6 @@ Speedometer
 
 
     <section class="type1">
-
-        <h1>Speedometer</h1>
-        <p>
-            Om uw snelheidsmeter correct te laten werken dient u onderstaand formulier in te vullen. Zeer belangrijk is om de diameter van uw wiel mee te geven. Indien u de verkeerde diameter meegaf, of u bijvoorbeeld een nieuwe fiets aangekocht hebt is het geen probleem om het formulier simpelweg nog eens te versturen. De snelheidsmeter zal zich daarna baseren op uw nieuwe diameter. Tijden het fietsen wordt uw data opgeslaan in een database. Onderaan deze pagina vindt u een functie om deze data te visualiseren.
-        </p>
-
-            <form action="{{ url_for('speedometer') }}" class="form_type2" method="POST">
-
-            {{ macros.build_label('', 'Gelieve uw voornaam in te geven: ') }}
-            <br>
-            {{ macros.build_input('text', 'voornaam','','') }}
-            <br>
-            {{ macros.build_label('','Gelieve uw familienaam in te geven: ') }}
-            <br>
-            {{ macros.build_input('text', 'naam', '','') }}
-            <br>
-            {{ macros.build_label('','Gelieve uw leeftijd in te geven: ') }}
-            <br>
-            {{ macros.build_input('number', 'leeftijd','','') }}
-            <br>
-
-            {{ macros.build_label('', 'Geef de diamater van uw wiel in (cm): ') }}
-            <br>
-            {{ macros.build_input('number', 'diameter wiel', '', '') }}
-            <br>
-                <i>{{ comment }}</i>
-                <br>
-            {{ macros.build_input('submit', 'submit1', 'Verzenden', 'button') }}
-
-        </form>
-
-    </section>
-
-    <section class="type1">
         <h1>Grafiek</h1>
         <div id="chart_div" style=""></div>
 
@@ -81,6 +47,8 @@ Speedometer
           }
         </script>
 
+
+    <div></div>
 
     </section>
 

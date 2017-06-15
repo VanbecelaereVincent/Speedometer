@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, redirect, url_for
 from flask import render_template
 import os
 import dbconn
@@ -115,60 +115,61 @@ def speedometer():
 
 def speedometerchart():
 
+
     if request.method == 'POST':
 
-        result = request.form
-        datum = result['selected']
-        print(result)
+        try:
+            result = request.form
+            datum = result['selected']
+            print(result)
+        except:
+            return redirect(url_for('speedometer'))
 
         db = dbconn.DbConnection()
 
-        # sql1 = ('select cast(Begin,date) from Sessie')
-        #
-        # sql2 = ('select cast(Einde,date) from Sessie')
-        #
-        # begintijden = db.query(sql1)
-        # eindtijden = db.query(sql2)
-        # print(begintijden)
 
         sql1 = ('select DS.Eindtijd , DS.Afstand, cast(S.Einde as date) from Deelsessie as DS LEFT join Sessie as S on DS.SessieID = S.ID')
 
-        # sql = ('select Eindtijd, afstand, cast(Einde as date) from Deelsessie join Sessie on SessieSessieID = Deelsessie.ID')
-
-        resultaten = db.query(sql1)
-
-        print(resultaten)
-
-        print(resultaten[0][0])
-        print(resultaten[0][2])
 
 
-        datas = []
-        datas_grafiek = []
-        totale_afstand = 0
+        try:
+            resultaten = db.query(sql1)
+            print(resultaten)
+
+            print(resultaten[0][0])
+            print(resultaten[0][2])
 
 
-        for resultaat in resultaten:
-            einde = str(resultaat[2])
-            print(einde)
-            if(einde == datum):
-                data = [str(resultaat[0]), resultaat[1]]
-                datas.append(data)
-
-        print(datas)
-
-        for lijst in datas:
-            totale_afstand += lijst[1]
-
-        datas_grafiek.append(totale_afstand)
-        datas_grafiek.append(datas[0][0])
-        datas_grafiek.append(datas[-1][0])
-
-        print(datas_grafiek)
+            datas = []
+            datas_grafiek = []
+            totale_afstand = 0
 
 
+            for resultaat in resultaten:
+                einde = str(resultaat[2])
+                print(einde)
+                if(einde == datum):
+                    data = [str(resultaat[0]), resultaat[1]]
+                    datas.append(data)
+
+            print(datas)
+
+            for lijst in datas:
+                totale_afstand += lijst[1]
+
+            datas_grafiek.append(totale_afstand)
+            datas_grafiek.append(datas[0][0])
+            datas_grafiek.append(datas[-1][0])
+
+            print(datas_grafiek)
+
+        except:
+            datas_grafiek=[0,'','']
 
         return render_template('speedometerchart.html', data = datas_grafiek)
+
+
+
 
 
 @app.route('/contact',methods= ['POST', 'GET'])

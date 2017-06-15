@@ -27,20 +27,20 @@ Speedometer
 
             <form action="{{ url_for('speedometer') }}" class="form_type2" method="POST">
 
-            {{ macros.build_label('', 'Gelieve uw voornaam in te geven: ') }}
+            {{ macros.build_label('', 'Voornaam: ') }}
             <br>
             {{ macros.build_input('text', 'voornaam','','') }}
             <br>
-            {{ macros.build_label('','Gelieve uw familienaam in te geven: ') }}
+            {{ macros.build_label('','Familienaam: ') }}
             <br>
             {{ macros.build_input('text', 'naam', '','') }}
             <br>
-            {{ macros.build_label('','Gelieve uw leeftijd in te geven: ') }}
+            {{ macros.build_label('','Leeftijd: ') }}
             <br>
             {{ macros.build_input('number', 'leeftijd','','') }}
             <br>
 
-            {{ macros.build_label('', 'Geef de diamater van uw wiel in (cm): ') }}
+            {{ macros.build_label('', 'Diameter wiel (cm): ') }}
             <br>
             {{ macros.build_input('number', 'diameter wiel', '', '') }}
             <br>

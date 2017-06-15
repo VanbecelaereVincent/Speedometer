@@ -93,13 +93,31 @@ def write_sessie():
     tijden_sessie.remove(tijden_sessie[0])
 
 
+try:
+    db = dbconn.DbConnection()
+    sql1 = ('select Voornaam from Gebruiker ORDER BY ID DESC LIMIT 1')
+    result1 = db.query(sql1)
+    voornaam = result1[0][0]
+
+    sql2 = ('select DiameterWiel from Gebruiker order by id desc limit 1')
+    result2 = db.query(sql2)
+    diameter = result2[0][0]
+
+except:
+    voornaam = 'default'
+    diameter = 0
+
+
 while True:
 
 
     wissel = button.wissel
 
     if wissel == 0:
-        LCD.write('Begin een sessie', '', '', '')
+
+
+        LCD.write('Begin een sessie,','{0}'.format(voornaam), '', 'Diameter wiel: {0}'.format(diameter))
+        time.sleep(1)
 
     if wissel == 1:
 

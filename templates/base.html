@@ -11,20 +11,21 @@
 <body>
 
 
-<header>
-
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('home') }}" {% block home %} {% endblock %}>Home</a></li>
-            <li><a href="{{ url_for('speedometer') }}" {% block speedometer %} {% endblock %}>Speedometer</a></li>
-            <li><a href="{{ url_for('contact') }}" {% block contact %} {% endblock %}>Contact</a></li>
-        </ul>
-    </nav>
-
-</header>
 
 
 <main>
+    <header>
+
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}" {% block home %} {% endblock %}>Home</a></li>
+                <li><a href="{{ url_for('speedometer') }}" {% block speedometer %} {% endblock %}>Speedometer</a></li>
+                <li><a href="{{ url_for('contact') }}" {% block contact %} {% endblock %}>Contact</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
 
     {% block main %}
 
@@ -34,15 +35,16 @@
     {% endblock %}
 
 
+    <footer>
+
+        <p>Project 1 - Speedometer - &copy; Vincent Vanbecelaere</p>
+
+
+    </footer>
+
 </main>
 
 
-<footer>
-
-    <p>Project 1 - Speedometer - &copy; Vincent Vanbecelaere</p>
-
-
-</footer>
 
 
 
