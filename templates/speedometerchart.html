@@ -53,37 +53,36 @@ Speedometer
     </section>
 
     <section class="type1">
-        <h1>Keuzemenu</h1>
-        <form action="{{ url_for('speedometerchart') }}" class="form_type1" method = "post">
+        <h1>Grafiek</h1>
+        <div id="chart_div" style=""></div>
 
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load('current', {'packages':['bar']});
+          google.charts.setOnLoadCallback(drawChart);
 
-            {{ macros.build_label('', 'Datum: ') }}
+          function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Tijd', 'Afstand'],
+              ['{{ data[1] }} - {{ data[2] }}', {{ data[0] }}]
 
-            <br>
-            <select name = "selected">
-                    {% for nieuwe_datum in nieuwe_datums %}
-                        <option name = "{{ datums[nieuwe_datum[1]][0] }}"
-                                value="{{ datums[nieuwe_datum[1]][0] }}">
-                                {{ nieuwe_datum[0] }}
-                        </option>
-                    {% endfor %}
+            ]);
 
-            </select>
+            var options = {
+              chart: {
+                title: 'Distance',
+                subtitle: 'Afgelegde afstand '
+              }
+            };
 
-            <br>
+            var chart = new google.charts.Bar(document.getElementById('chart_div'));
 
-            {{ macros.build_input('submit', 'submit2', 'Teken Grafiek', 'button') }}
-
-
-
-
-
-        </form>
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+          }
+        </script>
 
 
     </section>
-
-
 
 
 

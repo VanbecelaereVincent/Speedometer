@@ -78,13 +78,21 @@ p {
 
 }
 
+
+.type2 {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content:space-around
+
+}
+
 .type2 a {
     text-decoration: none;
 }
 
 
 .type2 h1 {
-    width: 50%;
+    width: 100%;
     background-color: #e96633;
     color: white;
     font-weight: bolder;
@@ -95,18 +103,15 @@ p {
     margin-bottom: 50px;
 }
 
-.type2>p {
-    margin-left: 10%;
-    margin-right: 60%;
+
+.chart_div {
+    background-color: green;
+    width: 900px;
+    height: 300px;
+    margin: 0 auto;
 }
 
-.type2 img {
-    float: right;
-}
 
-.clear {
-    clear: both;
-}
 
 
  .button {

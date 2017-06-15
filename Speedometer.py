@@ -17,6 +17,28 @@ def home():
 
 def speedometer():
 
+    nieuwe_datums = []
+
+
+    index = 0
+
+    datums = get_sessies_datums()
+
+    print(datums)
+
+    for datum in datums:
+        lijst = []
+        nieuwe_datum = datum[0].strftime('%Y-%m-%d')
+        lijst.append(nieuwe_datum)
+        lijst.append(index)
+        lijst.append(0)
+        print(lijst)
+        nieuwe_datums.append(lijst)
+        index += 1
+
+
+    print(nieuwe_datums)
+
     comment = ""
 
     if request.method == 'POST':
@@ -86,7 +108,68 @@ def speedometer():
 
 
 
-    return render_template('speedometer.html', comment = comment)
+    return render_template('speedometer.html', comment = comment, nieuwe_datums = nieuwe_datums, datums = datums)
+
+
+@app.route('/speedometerchart', methods= ['POST', 'GET'])
+
+def speedometerchart():
+
+    if request.method == 'POST':
+
+        result = request.form
+        datum = result['selected']
+        print(result)
+
+        db = dbconn.DbConnection()
+
+        # sql1 = ('select cast(Begin,date) from Sessie')
+        #
+        # sql2 = ('select cast(Einde,date) from Sessie')
+        #
+        # begintijden = db.query(sql1)
+        # eindtijden = db.query(sql2)
+        # print(begintijden)
+
+        sql1 = ('select DS.Eindtijd , DS.Afstand, cast(S.Einde as date) from Deelsessie as DS LEFT join Sessie as S on DS.SessieID = S.ID')
+
+        # sql = ('select Eindtijd, afstand, cast(Einde as date) from Deelsessie join Sessie on SessieSessieID = Deelsessie.ID')
+
+        resultaten = db.query(sql1)
+
+        print(resultaten)
+
+        print(resultaten[0][0])
+        print(resultaten[0][2])
+
+
+        datas = []
+        datas_grafiek = []
+        totale_afstand = 0
+
+
+        for resultaat in resultaten:
+            einde = str(resultaat[2])
+            print(einde)
+            if(einde == datum):
+                data = [str(resultaat[0]), resultaat[1]]
+                datas.append(data)
+
+        print(datas)
+
+        for lijst in datas:
+            totale_afstand += lijst[1]
+
+        datas_grafiek.append(totale_afstand)
+        datas_grafiek.append(datas[0][0])
+        datas_grafiek.append(datas[-1][0])
+
+        print(datas_grafiek)
+
+
+
+        return render_template('speedometerchart.html', data = datas_grafiek)
+
 
 @app.route('/contact',methods= ['POST', 'GET'])
 def contact():
@@ -94,6 +177,30 @@ def contact():
 
 
     return render_template('contact.html')
+
+
+
+
+
+def get_sessies_datums():
+
+    nieuwe_datums = []
+
+    db = dbconn.DbConnection()
+
+    sql1 = ('SELECT DISTINCT cast(Begin as DATE) from Sessie ORDER BY Begin ASC')
+
+    datums = db.query(sql1)
+
+    # for datum in datums:
+    #
+    #     nieuwe_datum = "{0}-{1}-{2}".format(datum[0], datum[1], datum[2])
+    #     nieuwe_datums.append(nieuwe_datum)
+
+
+
+
+    return datums
 
 
 

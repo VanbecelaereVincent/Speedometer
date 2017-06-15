@@ -29,21 +29,34 @@
             <article>
 
                 <a href="{{ url_for('speedometer') }}"><h1>Speedometer</h1></a>
-            <a href="{{ url_for('speedometer') }}">{{ macros.build_image('', 500,400) }}</a>
-            <p>Op deze pagina kan u uw persoonlijke gegevens meegeven. Deze zullen opgeslaan worden in onze database. Zeer belangrijk is om de diameter van uw wiel door te sturen. Indien u dit niet doet,z al de snelheidsmeter niet correct kunnen werken. Daarnaast kan u op deze pagina ook uw data visualiseren.</p>
+                <p>Op deze pagina kan u uw persoonlijke gegevens meegeven. Deze zullen opgeslaan worden in onze database. Zeer belangrijk is om de diameter van uw wiel door te sturen. Indien u dit niet doet,z al de snelheidsmeter niet correct kunnen werken. Daarnaast kan u op deze pagina ook uw data visualiseren.
+                </p>
 
+            </article>
+
+            <article>
+                <a href="{{ url_for('speedometer') }}">{{ macros.build_image('', 500,400) }}</a>
             </article>
 
 
         </section>
-    
+
         <section class="type2">
-            <a href="{{ url_for('contact') }}"><h1>Contact</h1></a>
-            <a href="{{ url_for('contact') }}">{{ macros.build_image('', 500,400) }}</a>
-            <p>Indien u vragen hebt over mijn opleiding, het project, deze snelheidsmeter, de website,.. aarzel dan zeker niet om het contactformulier in te vullen. </p>
+
+            <article>
+
+                <a href="{{ url_for('contact') }}"><h1>Contact</h1></a>
+                <p>Indien u vragen hebt over mijn opleiding, het project, deze snelheidsmeter, de website,.. aarzel dan zeker niet om het contactformulier in te vullen. </p>
+
+            </article>
+
+            <article>
+                <a href="{{ url_for('contact') }}">{{ macros.build_image('', 500,400) }}</a>
+            </article>
+
+
         </section>
 
-        <div class="clear"></div>
 
 
 
