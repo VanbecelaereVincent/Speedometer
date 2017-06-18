@@ -62,7 +62,6 @@ def magneet_gedetecteerd(getal):
 
         startijd = eindtijd
 
-
 def reset():
 
         global totale_afstand

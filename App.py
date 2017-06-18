@@ -3,7 +3,6 @@ import LCD
 import datetime
 import time
 import dbconn
-import HallSensor
 
 tijden_sessie = []
 
@@ -20,6 +19,9 @@ einde_sessie = 0
 huidige_afstand = 0.000
 total_distance = 0
 stop = 0
+
+time.sleep(4)
+
 
 def opslaan_deelsessies(start, stop, total_distance):
 
@@ -93,19 +95,17 @@ def write_sessie():
     tijden_sessie.remove(tijden_sessie[0])
 
 
-try:
-    db = dbconn.DbConnection()
-    sql1 = ('select Voornaam from Gebruiker ORDER BY ID DESC LIMIT 1')
-    result1 = db.query(sql1)
-    voornaam = result1[0][0]
 
-    sql2 = ('select DiameterWiel from Gebruiker order by id desc limit 1')
-    result2 = db.query(sql2)
-    diameter = result2[0][0]
+db = dbconn.DbConnection()
+sql1 = ('select Voornaam from Gebruiker ORDER BY ID DESC LIMIT 1')
+result1 = db.query(sql1)
+voornaam = result1[0][0]
 
-except:
-    voornaam = 'default'
-    diameter = 0
+sql2 = ('select DiameterWiel from Gebruiker order by id desc limit 1')
+result2 = db.query(sql2)
+diameter = result2[0][0]
+
+
 
 
 while True:
@@ -117,7 +117,7 @@ while True:
 
 
         LCD.write('Begin een sessie,','{0}'.format(voornaam), '', 'Diameter wiel: {0}'.format(diameter))
-        time.sleep(1)
+        time.sleep(2)
 
     if wissel == 1:
 
@@ -145,6 +145,10 @@ while True:
 
         stop = datetime.datetime.now().strftime('%H:%M:%S')
 
+        time.sleep(1)
+
+        import  HallSensor
+
         total_distance = HallSensor.totale_afstand
 
         #and (nu_seconds == start_sessie_seconds)
@@ -166,6 +170,7 @@ while True:
         snelheid = '{0} km/u'.format(HallSensor.snelheid)
 
         totale_afstand = '{0} km'.format(HallSensor.totale_afstand)
+
 
         LCD.write('----SPEEDOMETER-----', snelheid, totale_afstand, time.ctime(int(time.time())))
         time.sleep(1)
