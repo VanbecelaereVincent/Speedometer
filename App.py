@@ -131,14 +131,14 @@ while True:
 
         parameter1 += 0.000000000000000000000001
 
+        #start_sessie = datetime.datetime.now()
+
         start_sessie_minutes = int(str(start_sessie)[14:16])
-        #start_sessie_seconds = int(str(start_sessie)[17:19])
 
         start = start_sessie.strftime('%H:%M:%S')
 
         nu = datetime.datetime.now()
         nu_minutes = int(str(nu)[14:16]) #14:16 voor minutes
-        #nu_seconds= int(str(nu)[17:19])
         print("----minutes---")
         print(nu_minutes)
         print(start_sessie_minutes)
