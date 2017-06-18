@@ -7,11 +7,6 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(hall_sensor, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
 
-
-# deelsessies = []
-# deelsessie = []
-
-
 startijd = time.time()
 eindtijd = 0
 verstreken = 0

@@ -6,6 +6,7 @@ import dbconn
 
 tijden_sessie = []
 
+
 deel_sessie = []
 deel_sessies = []
 
@@ -19,6 +20,9 @@ einde_sessie = 0
 huidige_afstand = 0.000
 total_distance = 0
 stop = 0
+
+tijden_sessie.clear()
+deel_sessies.clear()
 
 time.sleep(4)
 
@@ -91,8 +95,7 @@ def write_sessie():
 
     db.execute(sql2, params2)
 
-    tijden_sessie.remove(tijden_sessie[0])
-    tijden_sessie.remove(tijden_sessie[0])
+    tijden_sessie.clear()
 
 
 
@@ -131,14 +134,12 @@ while True:
 
         parameter1 += 0.000000000000000000000001
 
-        #start_sessie = datetime.datetime.now()
-
         start_sessie_minutes = int(str(start_sessie)[14:16])
 
         start = start_sessie.strftime('%H:%M:%S')
 
         nu = datetime.datetime.now()
-        nu_minutes = int(str(nu)[14:16]) #14:16 voor minutes
+        nu_minutes = int(str(nu)[14:16])
         print("----minutes---")
         print(nu_minutes)
         print(start_sessie_minutes)
@@ -147,13 +148,15 @@ while True:
 
         time.sleep(1)
 
-        import  HallSensor
+        import HallSensor
 
         total_distance = HallSensor.totale_afstand
 
-        #and (nu_seconds == start_sessie_seconds)
+
+
 
         if((nu_minutes == start_sessie_minutes + 1) or (nu_minutes == start_sessie_minutes - 59)):
+
               opslaan_deelsessies(start,stop, total_distance)
               print('test')
               parameter2 +=1
@@ -175,19 +178,25 @@ while True:
         LCD.write('----SPEEDOMETER-----', snelheid, totale_afstand, time.ctime(int(time.time())))
         time.sleep(1)
 
+
     if wissel == 2:
         einde_sessie = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         tijden_sessie.append(einde_sessie)
 
         LCD.write('Einde sessie', '', '', '')
 
+        time.sleep(2)
+
         write_sessie()
 
-        #print(tijden_sessie)
+        time.sleep(2)
+
         write_deelsessies()
+        time.sleep(2)
         HallSensor.reset()
         huidige_afstand = 0
         parameter1 = 0
-        time.sleep(3)
+        button.wissel = 0
+
 
 
